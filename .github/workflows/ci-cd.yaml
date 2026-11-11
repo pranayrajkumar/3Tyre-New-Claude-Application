@@ -6,10 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: self-hosted
-   
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,7 +27,7 @@ jobs:
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-     # Build & push backend-department image
+      # Build & push backend-department image
       - name: Build & push department image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dept-svc:${{ github.sha }} ./backend-department
@@ -56,4 +59,10 @@ jobs:
           git diff --cached --quiet || git commit -m "Update image tags to ${{ github.sha }} [skip ci]"
           git push
 
-     
+      # Deploy updated manifests to EKS
+      - name: Deploy to EKS
+        if: github.event_name == 'push'
+        run: |
+          kubectl apply -f k8s/employee-deploy.yaml
+          kubectl apply -f k8s/dept-deploy.yaml
+          kubectl apply -f k8s/frontend-deploy.yaml
