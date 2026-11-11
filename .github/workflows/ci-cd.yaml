@@ -24,34 +24,36 @@ jobs:
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      # Build & push backend‑department image
+     # Build & push backend-department image
       - name: Build & push department image
         run: |
-          docker build -t ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/dept-svc:${{ github.sha }} ./backend-department
-          docker push ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/dept-svc:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dept-svc:${{ github.sha }} ./backend-department
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dept-svc:${{ github.sha }}
 
-      # Build & push backend‑employee image
+      # Build & push backend-employee image
       - name: Build & push employee image
         run: |
-          docker build -t ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/employee-svc:${{ github.sha }} ./backend-employee
-          docker push ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/employee-svc:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/employee-svc:${{ github.sha }} ./backend-employee
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/employee-svc:${{ github.sha }}
 
       # Build & push frontend image
       - name: Build & push frontend image
         run: |
-          docker build -t ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/frontend:${{ github.sha }} ./frontend
-          docker push ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/frontend:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }} ./frontend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}
 
       # Update image tags in k8s manifests and push the changes
       - name: Update image tags in k8s manifests
+        if: github.event_name == 'push'
         run: |
-          sed -i "s|image: .*/employee-svc:.*|image: ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/employee-svc:${{ github.sha }}|g" k8s/employee-deploy.yaml
-          sed -i "s|image: .*/dept-svc:.*|image: ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/dept-svc:${{ github.sha }}|g" k8s/dept-deploy.yaml
-          sed -i "s|image: .*/frontend:.*|image: ${{ env.IMAGE_REGISTRY }}/${{ github.repository }}/frontend:${{ github.sha }}|g" k8s/frontend-deploy.yaml
+          sed -i "s|image: .*/employee-svc:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/employee-svc:${{ github.sha }}|g" k8s/employee-deploy.yaml
+          sed -i "s|image: .*/dept-svc:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/dept-svc:${{ github.sha }}|g" k8s/dept-deploy.yaml
+          sed -i "s|image: .*/frontend:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}|g" k8s/frontend-deploy.yaml
+
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add k8s/*.yaml
-          git commit -m "Update image tags to ${{ github.sha }}"
+          git diff --cached --quiet || git commit -m "Update image tags to ${{ github.sha }} [skip ci]"
           git push
 
      
