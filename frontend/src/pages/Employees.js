@@ -51,7 +51,7 @@ export default function Employees() {
     <div className="fade-in">
       <div style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
         <div>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, margin: 0, background: 'linear-gradient(135deg, #1e1b4b, #ec4899)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>👥 Team Members</h2>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, margin: 0, background: 'linear-gradient(135deg, #1e1b4b, #ec4899)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>👥 Team Members Available</h2>
           <p style={{ color: '#64748b', marginTop: '10px', fontSize: '1rem' }}>{filteredEmployees.length} of {employees.length} employees displayed</p>
         </div>
         <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
