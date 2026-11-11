@@ -51,7 +51,7 @@ jobs:
         run: |
           sed -i "s|image: .*/employee-svc:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/employee-svc:${{ github.sha }}|g" k8s/employee-deploy.yaml
           sed -i "s|image: .*/dept-svc:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/dept-svc:${{ github.sha }}|g" k8s/dept-deploy.yaml
-          sed -i "s|image: .*/frontend:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}|g" k8s/frontend-deploy.yaml
+          sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}|g" k8s/frontend-deploy.yaml
 
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
