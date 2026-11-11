@@ -5,7 +5,7 @@ const departmentSchema = new mongoose.Schema({
   description: { type: String },
   manager:     { type: String },
   location:    { type: String },
-  headcount:   { type: Number, default: 0 }
+  budget:     { type: Number, default: 0 },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Department', departmentSchema);

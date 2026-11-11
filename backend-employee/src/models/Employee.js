@@ -5,6 +5,7 @@ const employeeSchema = new mongoose.Schema({
   email:        { type: String, required: true, unique: true },
   phone:        { type: String },
   jobTitle:     { type: String, required: true },
+  role:         { type: String, required: true },
   department:   { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
   location:     { type: String },
   status:       { type: String, enum: ['active', 'inactive'], default: 'active' },
