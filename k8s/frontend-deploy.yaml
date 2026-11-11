@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bpranayraj/emp-frontend:latest
+          image: bpranayraj/frontend:b449824ca07d466591691d5db1570317cbe13e01
           imagePullPolicy: Always
           ports:
             - containerPort: 80
