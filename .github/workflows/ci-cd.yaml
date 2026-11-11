@@ -56,11 +56,4 @@ jobs:
           git commit -m "Update image tags to ${{ github.sha }}"
           git push
 
-      # Optional: trigger Argo CD sync
-      - name: Sync Argo CD (optional)
-        if: ${{ secrets.ARGOCD_TOKEN }}
-        run: |
-          curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          chmod +x argocd
-          ./argocd login ${{ secrets.ARGOCD_SERVER }} --auth-token ${{ secrets.ARGOCD_TOKEN }} --insecure
-          ./argocd app sync <YOUR_APP_NAME>
+     
