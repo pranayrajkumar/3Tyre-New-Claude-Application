@@ -67,7 +67,7 @@ export default function AddDepartment() {
           <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '8px', background: 'linear-gradient(135deg, #1e1b4b, #4c1d95)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>
             Create Department
           </h2>
-          <p style={{ color: '#64748b' }}>Build your organizational structure</p>
+          <p style={{ color: '#64748b' }}>Build your organizational structure to your standars</p>
         </div>
         
         {msg && (
