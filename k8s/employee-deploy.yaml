@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: employee-svc
-          image: bpranayraj/employee-svc:99656b64b7e83cdcc52d7bfdd12cb5dd34ac2d9c
+          image: bpranayraj/employee-svc:bebb4abd32e6da3df21971d1913c5fcaf65ecf8f
           imagePullPolicy: Always
           ports:
             - containerPort: 5001
