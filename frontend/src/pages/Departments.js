@@ -24,7 +24,7 @@ export default function Departments() {
     <div className="fade-in">
       <div style={{ marginBottom: '40px' }}>
         <h2 style={{ fontSize: '2.5rem', fontWeight: 800, margin: 0, background: 'linear-gradient(135deg, #1e1b4b, #8b5cf6)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>📁 Departments</h2>
-        <p style={{ color: '#64748b', marginTop: '10px', fontSize: '1rem' }}>{departments.length} active team{departments.length !== 1 ? 's' : ''} powering your organization</p>
+        <p style={{ color: '#64748b', marginTop: '10px', fontSize: '1rem' }}>{departments.length} active team{departments.length !== 1 ? 's' : ''} members</p>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px,1fr))', gap: '28px' }}>
         {departments.map(d => <DepartmentCard key={d._id} dept={d} />)}
