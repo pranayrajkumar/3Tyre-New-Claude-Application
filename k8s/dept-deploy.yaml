@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: dept-svc
-          image: bpranayraj/dept-svc:e88cf0529a25849e1ac3b03d75573e8dcf3ae813
+          image: bpranayraj/dept-svc:99656b64b7e83cdcc52d7bfdd12cb5dd34ac2d9c
           imagePullPolicy: Always
           ports:
             - containerPort: 5002
