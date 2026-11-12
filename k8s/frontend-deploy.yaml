@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bpranayraj/frontend:b449824ca07d466591691d5db1570317cbe13e01
+          image: bpranayraj/frontend:e88cf0529a25849e1ac3b03d75573e8dcf3ae813
           imagePullPolicy: Always
           ports:
             - containerPort: 80
